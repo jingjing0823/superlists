@@ -1,11 +1,13 @@
-from selenium import webdriver
 import unittest
 
+from selenium import webdriver
 
-class NewVisitorTest(unittest.TestCase):
+
+class aNewVisitorTestq(unittest.TestCase):
 
     def setUp(self):
-        self.browser=webdriver.FireFox(executable_path = "/Users/lijing/python-project/study/tools/geckodriver")
+        # self.browser=webdriver.Firefox(executable_path = "/Users/lijing/python-project/study/tools/geckodriver")
+        self.browser=webdriver.Firefox()
 
     def tearDown(self):
         self.browser.quit()
@@ -18,7 +20,7 @@ class NewVisitorTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
-# driver = webdriver.Firefox(executable_path = "/Users/lijing/python-project/study/tools/geckodriver")
+# driver = webdriveraaa.Firefox(executable_path = "/Users/lijing/python-project/study/tools/geckodriver")
 # #打开搜狗首页
 # driver.get("http://www.sogou.com")
 # #清空搜索框输入默认内容
