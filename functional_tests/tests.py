@@ -8,6 +8,8 @@ from django.test import LiveServerTestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 MAX_WAIT=10
 from selenium.common.exceptions import WebDriverException
+import os
+
 
 
 class NewVisitorTest(StaticLiveServerTestCase):
@@ -15,6 +17,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         # self.browser=webdriver.Firefox(executable_path = "/Users/lijing/python-project/study/tools/geckodriver")
         self.browser=webdriver.Firefox()
+        staging_server=os.getenv('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url='http://'+staging_server
 
     def tearDown(self):
         self.browser.quit()
