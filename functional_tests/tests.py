@@ -48,10 +48,12 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
         
-        inputbox=self.browser.find_element_by_id('id_new_item')
+        
         #再输入一个待办事项
+        inputbox=self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('use peacock feathers to make a fly')
         inputbox.send_keys(Keys.ENTER)
+        #验证两个待办事项都在表单中
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
         self.wait_for_row_in_list_table('2: use peacock feathers to make a fly')
         #table=self.browser.find_element_by_id('id_list_table')
@@ -85,11 +87,11 @@ class NewVisitorTest(LiveServerTestCase):
         input_box=self.browser.find_element_by_id('id_new_item')
         input_box.send_keys("buy milk")
         input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1. buy milk')
+        self.wait_for_row_in_list_table('1: buy milk')
         
         #张先生的清单有一个唯一的url
         mr_zhang_list_url=self.browser.current_url
-        self.assertRegex(mr_zhang_list_url,'/list/.+')
+        self.assertRegex(mr_zhang_list_url,'/lists/.+')
         self.assertNotEqual(miss_li_list_url,mr_zhang_list_url)
         
         #张先生的清单中没有李小姐的代办事项，有自己的代办事项
