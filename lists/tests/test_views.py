@@ -3,6 +3,7 @@ from django.urls import resolve
 from lists.views import home_page
 from django.http import HttpRequest
 from django.template.loader import render_to_string
+from django.utils.html import escape
 
 from lists.models import Item,List
 # Create your tests here.
@@ -94,7 +95,20 @@ class NewListTest(TestCase):
         self.assertEqual(new_item.text,'A new list item')
         #self.assertIn('A new list item',response.content.decode())
         #self.assertTemplateUsed(response,'home.html')
-
+    def test_validation_errors_are_sent_back_to_home_page(self):
+        response=self.client.post('/lists/new',data={"text":''})
+        self.assertEqual(response.status_code,200)
+        self.assertTemplateUsed(response,'home.html')
+        expected_error=escape("your can't hava an empty list item")
+#        print(response.content.decode())
+        self.assertContains(response,expected_error)
+        
+    def test_invalid_list_items_arent_saved(self):
+        self.client.post('/lists/new',data={'item_text':''})
+        self.assertEqual(List.objects.count(),0)
+        self.assertEqual(Item.objects.count(),0)
+        
+        
 class NewItemTest(TestCase):
     def test_can_save_a_POST_rquest_to_an_existing_list(self):
         other_list=List.objects.create()
