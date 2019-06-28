@@ -6,12 +6,22 @@ from django.template.loader import render_to_string
 from django.utils.html import escape
 
 from lists.models import Item,List
+
+from lists.forms import ItemForm
 # Create your tests here.
 class HomePageTest(TestCase):
 
     def test_root_url_resolves_to_home_view(self):
         found=resolve('/')
         self.assertEqual(found.func,home_page)
+        
+    def test_home_page_returns_correct_html(self):
+        response=self.client.get('/')
+        self.assertTemplateUsed(response,'home.html')
+        
+    def test_home_page_users_item_form(self):
+        response=self.client.get('/')
+        self.assertIsInstance(response.context['form'],ItemForm)           
     #def test_home_page_returns_correct_html(self):
         #request=HttpRequest()
         #response=home_page(request)
@@ -21,9 +31,7 @@ class HomePageTest(TestCase):
         #self.assertIn('<title>To-Do</title>',html)
         #self.assertTrue(html.endswith("</html>"))
         #self.assertEqual(html,expected_html)
-    def test_home_page_returns_correct_html1(self):
-        response=self.client.get('/')
-        self.assertTemplateUsed(response,'home.html')
+
     #def test_only_save_item_when_necessary(self):
         #self.client.get('/')
         #self.assertEqual(Item.objects.count(),0)
