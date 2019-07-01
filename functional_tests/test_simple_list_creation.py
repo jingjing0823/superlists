@@ -13,7 +13,7 @@ class NewVisitorTest(FunctionalTest):
         header_text=self.browser.find_element_by_tag_name("h1").text
         self.assertIn("To-Do",header_text)
         #输入代办事项
-        inputbox=self.browser.find_element_by_id('id_new_item')
+        inputbox=self.get_item_input_box()
         self.assertEqual(
         inputbox.get_attribute('placeholder'),
         "Enter a to-do item"
@@ -25,7 +25,7 @@ class NewVisitorTest(FunctionalTest):
         
         
         #再输入一个待办事项
-        inputbox=self.browser.find_element_by_id('id_new_item')
+        inputbox=self.get_item_input_box()
         inputbox.send_keys('use peacock feathers to make a fly')
         inputbox.send_keys(Keys.ENTER)
         #验证两个待办事项都在表单中
@@ -42,7 +42,7 @@ class NewVisitorTest(FunctionalTest):
     def test_multiple_user_can_start_lists_at_different_urls(self):
         #李小姐打开浏览器
         self.browser.get(self.live_server_url)
-        input_box=self.browser.find_element_by_id('id_new_item')
+        input_box=self.get_item_input_box()
         #李小姐输入代办事项并保存
         input_box.send_keys('Buy peacock feathers')
         input_box.send_keys(Keys.ENTER)
@@ -59,7 +59,7 @@ class NewVisitorTest(FunctionalTest):
         page_text=self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers',page_text)
         #张先生输入自己的代办事项
-        input_box=self.browser.find_element_by_id('id_new_item')
+        input_box=self.get_item_input_box()
         input_box.send_keys("buy milk")
         input_box.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: buy milk')
