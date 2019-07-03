@@ -13,7 +13,6 @@ def home_page(request):
 def view_list(request,list_id):
     form=ItemForm()
     list_=List.objects.get(id=list_id)
-    error=None
     if request.method == 'POST':
         form=ItemForm(data=request.POST)
         if form.is_valid():
