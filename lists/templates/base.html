@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/base.css" rel='stylesheet'>
+    <script src="/static/jquery-3.4.1.min.js"></script>
   </head>
   <body>
   	<div class='container'>
@@ -30,7 +31,7 @@
 					</div>
 </div>
 </div>
-	
+
 	
 	<div class='row'>
 		<div class='col-md-6 col-md-offset-3'>
@@ -40,5 +41,14 @@
 </div>
 
 </div>
+	<script>
+		$(document).ready(function(){
+			window.Superlists.initialize();
+			});
+		
+		</script>
+
+<script src="/static/list.js"></script>
+
   </body>
 </html>	
