@@ -17,10 +17,15 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from lists import views as lists_views
 from lists import urls as lists_urls
+from accounts import urls as accounts_urls
+from erp_test import views as erp_views
 
 
 urlpatterns = [
+    url(r'^call_back$',erp_views.call_back,name='call_back'),
+    url(r'^syncstatus$',erp_views.syncstatus,name='syncstatus'),
     url(r'^$',lists_views.home_page,name='home'),
     url(r'^lists/',include(lists_urls)),
     #url(r'^admin/', admin.site.urls),
+    url(r'^accounts/',include(accounts_urls)),
 ]

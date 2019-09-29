@@ -38,7 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lists',
+    'accounts',
+    'erp_test',
 ]
+AUTH_USER_MODEL='accounts.ListUser'
+AUTHENICATION_BACKENDS=[
+'accounts.authentication.PasswordlessAuthenticationBackend',
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,3 +128,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT=os.path.abspath(os.path.join(BASE_DIR,'../static'))
+
+EMAIL_HOST = "smtp.163.com"
+EMAIL_HOST_USER = "lijing0823@163.com"
+EMAIL_HOST_PASSWORD = os.getenv('my_email_host_password')
+EMAIL_PORT=465
+EMAIL_USE_TLS=False
+
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "obeythetestinggoat@gmail.com"
+EMAIL_HOST_PASSWORD = os.getenv('my_email_test_password')
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
