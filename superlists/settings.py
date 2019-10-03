@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'lists',
     'accounts',
+    'erp_test',
 ]
 AUTH_USER_MODEL='accounts.ListUser'
 AUTHENICATION_BACKENDS=[
